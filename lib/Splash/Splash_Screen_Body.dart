@@ -1,13 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
- 
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
- 
-import 'package:video_player/video_player.dart';
-
-import '../Core/Utils/AppRouter.dart';
+import 'package:islami_app/Core/Utils/AppRouter.dart';
 
 class SplashScreenBody extends StatefulWidget {
   const SplashScreenBody({super.key});
@@ -16,59 +9,30 @@ class SplashScreenBody extends StatefulWidget {
   State<SplashScreenBody> createState() => _SplashScreenBodyState();
 }
 
-class _SplashScreenBodyState extends State<SplashScreenBody> {
-  late VideoPlayerController _controller;
-  bool _visible = false;
+class _SplashScreenBodyState extends State<SplashScreenBody>
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
+    NavigateToHomeScreen();
+  }
 
-    _controller = VideoPlayerController.asset("Assets/Videos/video.mp4");
-    _controller.initialize().then((value) {
-       _controller.setLooping(true);
-      Timer(Duration(seconds: 21), () {
-        setState(() {
-          _controller.play();
-          _visible = true;
-        });
-      });
-    });
-
-    void  NavigateToHomeScreen() {
-    Future.delayed(const Duration(seconds: 21), () {
-      
+  void NavigateToHomeScreen() {
+    Future.delayed(const Duration(seconds: 3), () {
       GoRouter.of(context).push(AppRouter.KhomeScreen);
     });
   }
-  }
+
   @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-     
-    }
-
-  _getVideoBackground() {
-    return AnimatedOpacity(
-      opacity: _visible ? 1.0 : 0.0,
-      duration: Duration(seconds: 21),
-      child: VideoPlayer(_controller),
-    );
-  }
-
-
- @override
   Widget build(BuildContext context) {
-    return  Scaffold(body: Center(
-        child: Stack(
-          children: <Widget>[
-            _getVideoBackground(),
-          ],
-        ),
-      ),);
+    return Scaffold(
+        body: Image.asset(
+      'Assets/Images/download (1).jpeg',
+      fit: BoxFit.fill,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      alignment: Alignment.center,
+    ));
   }
 }
