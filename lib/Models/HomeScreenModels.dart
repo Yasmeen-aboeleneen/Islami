@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sizer/sizer.dart';
 
 import '../Core/Utils/AppRouter.dart';
 
@@ -12,14 +13,20 @@ class HomeScreenModels extends StatefulWidget {
 
 class _HomeScreenModelsState extends State<HomeScreenModels>
     with SingleTickerProviderStateMixin {
+
+      
   @override
   initState() {
     super.initState();
   }
 
+  
+
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
+      
+     
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -112,22 +119,32 @@ class _HomeScreenModelsState extends State<HomeScreenModels>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(213, 186, 214, 216),
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              height: 100,
+            Padding(
+          padding: const EdgeInsets.all(10),
+          child: GestureDetector(
+            onTap: () {
+              Future.delayed(const Duration(seconds: 0), () {
+                GoRouter.of(context).push(AppRouter.Kknow);
+              });
+            },
+            child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 211, 233, 195),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                height: 100,
               width: 150,
-              child: Center(
-                  child: Text(
-                'كتب اسلامية',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 79, 81, 62),
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
-              )),
-            ),
+                child: Center(
+                    child: Text(
+                  'تذكر',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 79, 81, 62),
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ))),
+          ),
+        ),
+             
             Container(
               decoration: BoxDecoration(
                 color: Color.fromARGB(213, 240, 181, 139),
@@ -149,32 +166,8 @@ class _HomeScreenModelsState extends State<HomeScreenModels>
         SizedBox(
           height: 40,
         ),
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: GestureDetector(
-            onTap: () {
-              Future.delayed(const Duration(seconds: 0), () {
-                GoRouter.of(context).push(AppRouter.Kknow);
-              });
-            },
-            child: Container(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 211, 233, 195),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                height: 100,
-                width: double.infinity,
-                child: Center(
-                    child: Text(
-                  'تذكر',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 79, 81, 62),
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ))),
-          ),
-        ),
-      ],
+         
+    ],
     );
   }
 }
